@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Cumpleaños Katleen ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Feliz Cumpleaños Katleen 💛</title>
     <!-- Fuentes de Google -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -13,6 +13,10 @@
             --sunflower-yellow: #FFD700;
             --sunflower-dark: #B8860B;
             --heart-red: #ff4d4d;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
@@ -25,7 +29,7 @@
             color: white;
         }
 
-        /* --- PANTALLA DE INICIO MEJORADA --- */
+        /* --- PANTALLA DE INICIO MEJORADA PARA MÓVIL --- */
         .start-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -36,30 +40,33 @@
             align-items: center;
             z-index: 1000;
             transition: opacity 1.5s ease;
+            padding: 20px;
         }
 
         .start-content {
             text-align: center;
             animation: pulsar 2s infinite;
+            max-width: 100%;
         }
 
         .start-content h2 {
             font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
+            font-size: clamp(2rem, 8vw, 3rem);
             color: #ffd700;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-shadow: 0 0 20px #ffaa00;
+            word-wrap: break-word;
         }
 
         .start-content .girasol-inicial {
-            font-size: 5rem;
-            margin: 20px 0;
+            font-size: clamp(3rem, 12vw, 5rem);
+            margin: 15px 0;
             animation: girar 10s linear infinite;
         }
 
         .start-btn {
-            padding: 18px 50px;
-            font-size: 1.8rem;
+            padding: 15px 40px;
+            font-size: clamp(1.5rem, 6vw, 1.8rem);
             background: linear-gradient(45deg, #FFD700, #FFA500);
             color: #333;
             border: none;
@@ -68,18 +75,30 @@
             font-family: 'Dancing Script', cursive;
             box-shadow: 0 0 30px #FFD700;
             transition: all 0.3s;
-            margin-top: 30px;
+            margin-top: 20px;
             font-weight: bold;
+            width: auto;
+            min-width: 200px;
+            max-width: 90%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .start-btn:hover { 
-            transform: scale(1.1); 
+            transform: scale(1.05); 
             box-shadow: 0 0 50px #FFD700;
+        }
+
+        .start-content p {
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            margin-top: 15px;
+            color: #aaa;
         }
 
         @keyframes pulsar {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.02); }
         }
 
         @keyframes girar {
@@ -87,13 +106,13 @@
             to { transform: rotate(360deg); }
         }
 
-        /* --- LUNA --- */
+        /* --- LUNA RESPONSIVA --- */
         .luna {
             position: absolute;
-            top: 50px;
+            top: max(20px, 5vh);
             right: 5%;
-            width: 80px;
-            height: 80px;
+            width: clamp(50px, 10vw, 80px);
+            height: clamp(50px, 10vw, 80px);
             background: radial-gradient(circle at 30% 30%, #fffde7, #ffe484);
             border-radius: 50%;
             box-shadow: 0 0 40px #fffde7, 0 0 80px #ffd700;
@@ -102,11 +121,11 @@
         }
 
         @keyframes brilloLuna {
-            0%, 100% { box-shadow: 0 0 40px #fffde7, 0 0 80px #ffd700; }
-            50% { box-shadow: 0 0 60px #fffde7, 0 0 120px #ffd700; }
+            0%, 100% { box-shadow: 0 0 clamp(20px, 4vw, 40px) #fffde7, 0 0 clamp(40px, 8vw, 80px) #ffd700; }
+            50% { box-shadow: 0 0 clamp(30px, 6vw, 60px) #fffde7, 0 0 clamp(60px, 12vw, 120px) #ffd700; }
         }
 
-        /* --- NUBES --- */
+        /* --- NUBES RESPONSIVAS --- */
         .nube {
             position: absolute;
             background: rgba(255, 255, 255, 0.05);
@@ -116,8 +135,20 @@
             z-index: 0;
         }
 
-        .nube1 { top: 10%; left: -200px; width: 300px; height: 80px; }
-        .nube2 { top: 25%; right: -200px; width: 400px; height: 100px; animation-direction: reverse; }
+        .nube1 { 
+            top: 10%; 
+            left: -200px; 
+            width: min(300px, 80vw); 
+            height: min(80px, 10vw); 
+        }
+        
+        .nube2 { 
+            top: 25%; 
+            right: -200px; 
+            width: min(400px, 90vw); 
+            height: min(100px, 12vw); 
+            animation-direction: reverse; 
+        }
 
         @keyframes flotarNube {
             from { transform: translateX(-200px); }
@@ -129,44 +160,51 @@
             position: relative;
             z-index: 10;
             text-align: center;
-            padding-top: 8vh;
+            padding: max(5vh, 20px) 15px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 50vh;
         }
 
-        /* --- TEXTO --- */
+        /* --- TEXTO RESPONSIVO --- */
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
+            font-size: clamp(2.2rem, 8vw, 4rem);
             color: #fff;
             text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff0000;
-            margin: 0;
+            margin: 0 0 10px;
             opacity: 0;
             transform: translateY(20px);
             animation: aparecerTexto 1.5s forwards 1s;
+            line-height: 1.2;
+            padding: 0 10px;
+            word-wrap: break-word;
         }
 
         p {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
             color: #ffd700;
-            margin-top: 10px;
+            margin: 5px 0 15px;
             opacity: 0;
             animation: aparecerTexto 1.5s forwards 2s;
+            padding: 0 15px;
+            line-height: 1.4;
+            word-wrap: break-word;
         }
 
         @keyframes aparecerTexto {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- MARCO PARA LA IMAGEN (key.jpg) --- */
+        /* --- MARCO PARA LA IMAGEN MEJORADO PARA MÓVIL --- */
         .marco-imagen {
-            width: 250px;
-            height: 250px;
+            width: clamp(180px, 50vw, 250px);
+            height: clamp(180px, 50vw, 250px);
             border-radius: 50%;
-            border: 5px solid #FFD700;
-            box-shadow: 0 0 50px #FFD700, 0 0 100px #ffaa00;
-            margin: 30px auto;
+            border: clamp(3px, 1vw, 5px) solid #FFD700;
+            box-shadow: 0 0 clamp(30px, 5vw, 50px) #FFD700, 0 0 clamp(50px, 8vw, 100px) #ffaa00;
+            margin: 10px auto 20px;
             overflow: hidden;
             animation: flotarMarco 3s ease-in-out infinite;
             background: linear-gradient(45deg, #2e7d32, #4caf50);
@@ -186,15 +224,18 @@
             transition: transform 0.3s;
         }
 
-        .marco-imagen img:hover {
-            transform: scale(1.1);
-        }
-
         .marco-imagen .placeholder {
             color: white;
-            font-size: 1.2rem;
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
             text-align: center;
-            padding: 20px;
+            padding: 15px;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
         }
 
         @keyframes aparecerImagen {
@@ -204,69 +245,86 @@
 
         @keyframes flotarMarco {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(clamp(-8px, -2vh, -15px)); }
         }
 
-        /* --- JARDÍN CON FLORES INTERCALADAS --- */
+        /* --- JARDÍN RESPONSIVO CON GRID --- */
         .garden {
-            position: absolute;
+            position: relative;
             bottom: 0;
             width: 100%;
-            height: 40vh;
+            min-height: 25vh;
             z-index: 5;
-            display: flex;
-            justify-content: space-around;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: clamp(5px, 2vw, 10px);
             align-items: flex-end;
-            padding-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
+            padding: 0 clamp(5px, 2vw, 10px) clamp(10px, 3vh, 20px);
+            margin-top: auto;
         }
 
         /* Estilos base para todas las flores */
         .sunflower, .margarita {
             position: relative;
-            width: 100px;
-            height: 250px;
+            width: 100%;
+            aspect-ratio: 0.4;
+            max-width: clamp(60px, 15vw, 100px);
+            margin: 0 auto;
             transform-origin: bottom center;
             animation: crecer 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
             opacity: 0;
         }
 
-        /* Tallo (compartido) */
+        /* Tallo responsive */
         .tallo {
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 10px;
+            width: clamp(5px, 1.5vw, 10px);
             height: 0;
             background: linear-gradient(90deg, #2e7d32, #4caf50);
             border-radius: 5px;
             animation: crecerTallo 1.2s ease-out forwards;
-            box-shadow: 0 0 10px #4caf50;
+            box-shadow: 0 0 clamp(5px, 1vw, 10px) #4caf50;
         }
 
-        /* Hojas (compartidas) */
+        /* Hojas responsivas */
         .hoja {
             position: absolute;
-            width: 30px; height: 15px;
+            width: clamp(15px, 4vw, 30px);
+            height: clamp(8px, 2vw, 15px);
             background: linear-gradient(135deg, #4caf50, #2e7d32);
             border-radius: 0 50% 0 50%;
             transform-origin: left center;
-            box-shadow: 0 0 10px #4caf50;
+            box-shadow: 0 0 clamp(5px, 1vw, 10px) #4caf50;
         }
-        .hoja-izq { top: 100px; left: -10px; transform: rotate(-45deg); }
-        .hoja-der { top: 140px; right: -10px; transform: rotate(225deg); }
+        
+        .hoja-izq { 
+            top: min(60px, 30%); 
+            left: clamp(-15px, -3vw, -10px); 
+            transform: rotate(-45deg); 
+        }
+        
+        .hoja-der { 
+            top: min(80px, 40%); 
+            right: clamp(-15px, -3vw, -10px); 
+            transform: rotate(225deg); 
+        }
 
-        /* --- GIRASOL (amarillo/dorado) --- */
-        .flor-girasol {
+        /* Flor responsive */
+        .flor-girasol, .flor-margarita {
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%) scale(0);
-            width: 90px;
-            height: 90px;
+            width: min(100%, 90px);
+            aspect-ratio: 1;
             border-radius: 50%;
+            animation: aparecerFlor 1s forwards 0.5s;
+        }
+
+        .flor-girasol {
             background: conic-gradient(
                 #FFD700 0deg 20deg, #B8860B 20deg 40deg,
                 #FFD700 40deg 60deg, #B8860B 60deg 80deg,
@@ -278,30 +336,10 @@
                 #FFD700 280deg 300deg, #B8860B 300deg 320deg,
                 #FFD700 320deg 340deg, #B8860B 340deg 360deg
             );
-            box-shadow: 0 0 20px #FFD700;
-            animation: aparecerFlor 1s forwards 0.5s;
+            box-shadow: 0 0 clamp(10px, 2vw, 20px) #FFD700;
         }
 
-        .centro-girasol {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 35px; height: 35px;
-            background: radial-gradient(circle, #8B4513, #5d2e0c);
-            border-radius: 50%;
-            z-index: 2;
-            box-shadow: inset -3px -3px 5px #3e1e06;
-        }
-
-        /* --- MARGARITA (blanca) --- */
         .flor-margarita {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%) scale(0);
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
             background: conic-gradient(
                 #ffffff 0deg 30deg, #f0f0f0 30deg 60deg,
                 #ffffff 60deg 90deg, #f0f0f0 90deg 120deg,
@@ -310,40 +348,48 @@
                 #ffffff 240deg 270deg, #f0f0f0 270deg 300deg,
                 #ffffff 300deg 330deg, #f0f0f0 330deg 360deg
             );
-            box-shadow: 0 0 20px #ffffff;
-            animation: aparecerFlor 1s forwards 0.5s;
+            box-shadow: 0 0 clamp(10px, 2vw, 20px) #ffffff;
         }
 
-        .centro-margarita {
+        .centro-girasol, .centro-margarita {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 25px; height: 25px;
-            background: radial-gradient(circle, #FFD700, #B8860B);
+            width: 40%;
+            aspect-ratio: 1;
             border-radius: 50%;
             z-index: 2;
         }
 
+        .centro-girasol {
+            background: radial-gradient(circle, #8B4513, #5d2e0c);
+            box-shadow: inset -3px -3px 5px #3e1e06;
+        }
+
+        .centro-margarita {
+            background: radial-gradient(circle, #FFD700, #B8860B);
+        }
+
         /* --- ANIMACIONES --- */
         @keyframes crecer { 
-            from { transform: scale(0) translateY(50px); opacity: 0; } 
+            from { transform: scale(0) translateY(20px); opacity: 0; } 
             to { opacity: 1; transform: scale(1) translateY(0); } 
         }
         
         @keyframes crecerTallo { 
             from { height: 0; } 
-            to { height: 160px; } 
+            to { height: clamp(100px, 25vh, 160px); } 
         }
         
         @keyframes aparecerFlor { 
             to { transform: translateX(-50%) scale(1); } 
         }
 
-        /* --- EFECTOS FLOTANTES --- */
+        /* --- CORAZONES RESPONSIVOS --- */
         .corazon {
             position: absolute;
             color: var(--heart-red);
-            font-size: 24px;
+            font-size: clamp(15px, 4vw, 24px);
             animation: flotarCorazon 4s ease-in infinite;
             pointer-events: none;
             z-index: 20;
@@ -359,7 +405,7 @@
         .estrella {
             position: absolute;
             color: white;
-            font-size: 12px;
+            font-size: clamp(8px, 2.5vw, 12px);
             animation: parpadear 2s infinite;
         }
         
@@ -368,67 +414,101 @@
             50% { opacity: 1; } 
         }
 
-        /* --- PASTO MEJORADO --- */
+        /* --- PASTO RESPONSIVO --- */
         .pasto {
-            position: absolute;
+            position: relative;
             bottom: 0;
             width: 100%;
-            height: 40px;
+            height: clamp(25px, 5vh, 40px);
             background: linear-gradient(to top, #1b5e20, #4caf50);
             z-index: 6;
-            border-top: 3px solid #FFD700;
+            border-top: clamp(2px, 0.5vw, 3px) solid #FFD700;
             box-shadow: 0 -5px 20px #4caf50;
+            margin-top: -2px;
         }
 
-        .pasto::before {
-            content: '';
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            width: 100%;
-            font-size: 20px;
-            color: #4caf50;
-            text-shadow: 0 0 10px #4caf50;
-            animation: mecerPasto 3s ease-in-out infinite;
-            white-space: nowrap;
-        }
-
-        @keyframes mecerPasto {
-            0%, 100% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .sunflower, .margarita { transform: scale(0.6); }
-            .garden { height: 30vh; }
-            .marco-imagen { width: 180px; height: 180px; }
-        }
-
+        /* Media queries específicos para móviles */
         @media (max-width: 480px) {
-    .garden {
-        gap: 5px;  /* Menos espacio entre flores */
-        padding-bottom: 10px;
-    }
-    .sunflower, .margarita {
-        width: 70px;  /* Más pequeño aún */
-        height: 180px;
-    }
-    h1 {
-        font-size: 2rem;
-        padding: 0 10px;
-    }
-    p {
-        font-size: 1.2rem;
-        padding: 0 15px;
-    }
-    .marco-imagen {
-        width: 150px;
-        height: 150px;
-        margin: 15px auto;
-    }
-}
+            .garden {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 3px;
+                padding: 0 3px;
+            }
+            
+            .sunflower, .margarita {
+                max-width: 55px;
+            }
+            
+            .hoja-izq { left: -10px; }
+            .hoja-der { right: -10px; }
+            
+            @keyframes crecerTallo { 
+                to { height: 100px; } 
+            }
+            
+            .container {
+                padding-top: 15px;
+            }
+            
+            .start-btn {
+                min-width: 180px;
+                padding: 12px 30px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .garden {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 2px;
+            }
+            
+            .sunflower, .margarita {
+                max-width: 45px;
+            }
+            
+            @keyframes crecerTallo { 
+                to { height: 80px; } 
+            }
+            
+            .hoja-izq { left: -8px; }
+            .hoja-der { right: -8px; }
+        }
+
+        /* Ajuste para pantallas muy pequeñas */
+        @media (max-width: 320px) {
+            .sunflower, .margarita {
+                max-width: 40px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .marco-imagen {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        /* Orientación landscape */
+        @media (orientation: landscape) and (max-height: 600px) {
+            .garden {
+                min-height: 30vh;
+            }
+            
+            .container {
+                min-height: 40vh;
+            }
+            
+            .marco-imagen {
+                width: 150px;
+                height: 150px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -439,7 +519,7 @@
             <h2>🎁 Un regalo especial para ti</h2>
             <div class="girasol-inicial">🌻✨🌼✨🌻</div>
             <button class="start-btn" onclick="iniciarFiesta()">Abrir Regalo</button>
-            <p style="color: #aaa; margin-top: 20px;">Haz clic para comenzar la magia ✨</p>
+            <p>Haz clic para comenzar la magia ✨</p>
         </div>
     </div>
 
@@ -457,71 +537,68 @@
         
         <!-- MARCO PARA LA IMAGEN key.jpg -->
         <div class="marco-imagen" id="marcoImagen">
-            <!-- IMPORTANTE: Coloca tu archivo key.jpg en la misma carpeta -->
             <img src="key.jpg" alt="Katleen" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div class="placeholder" style="display: none; width: 100%; height: 100%; background: linear-gradient(45deg, #FFD700, #FFA500); color: white; align-items: center; justify-content: center;">
-                ✨ key.jpg ✨<br>Coloca aquí tu foto
-            </div>
+            <div class="placeholder" style="display: none;">✨ key.jpg ✨<br>Coloca aquí tu foto</div>
         </div>
     </div>
     
-    <!-- JARDÍN CON FLORES INTERCALADAS (10 en total: 5 girasoles + 5 margaritas intercaladas) -->
+    <!-- JARDÍN CON FLORES INTERCALADAS -->
     <div class="garden">
-        <!-- FLOR 1: Margarita (blanca) -->
+        <!-- FLOR 1: Margarita -->
         <div class="margarita" style="animation-delay: 0.2s;">
             <div class="tallo"><div class="hoja hoja-izq"></div><div class="hoja hoja-der"></div></div>
             <div class="flor-margarita"><div class="centro-margarita"></div></div>
         </div>
         
-        <!-- FLOR 2: Girasol (amarillo) -->
+        <!-- FLOR 2: Girasol -->
         <div class="sunflower" style="animation-delay: 0.4s;">
             <div class="tallo"><div class="hoja hoja-izq"></div><div class="hoja hoja-der"></div></div>
             <div class="flor-girasol"><div class="centro-girasol"></div></div>
         </div>
         
-        <!-- FLOR 3: Margarita (blanca) -->
+        <!-- FLOR 3: Margarita -->
         <div class="margarita" style="animation-delay: 0.6s;">
             <div class="tallo"><div class="hoja hoja-izq"></div><div class="hoja hoja-der"></div></div>
             <div class="flor-margarita"><div class="centro-margarita"></div></div>
         </div>
         
-        <!-- FLOR 4: Girasol (amarillo) -->
+        <!-- FLOR 4: Girasol -->
         <div class="sunflower" style="animation-delay: 0.8s;">
             <div class="tallo"><div class="hoja hoja-izq"></div><div class="hoja hoja-der"></div></div>
             <div class="flor-girasol"><div class="centro-girasol"></div></div>
         </div>
         
-        <!-- FLOR 5: Margarita (blanca) -->
+        <!-- FLOR 5: Margarita -->
         <div class="margarita" style="animation-delay: 1.0s;">
             <div class="tallo"><div class="hoja hoja-izq"></div><div class="hoja hoja-der"></div></div>
             <div class="flor-margarita"><div class="centro-margarita"></div></div>
         </div>
         
-        <!-- FLOR 6: Girasol (amarillo) -->
+        <!-- FLOR 6: Girasol -->
         <div class="sunflower" style="animation-delay: 1.2s;">
             <div class="tallo"><div class="hoja hoja-izq"></div><div class="hoja hoja-der"></div></div>
             <div class="flor-girasol"><div class="centro-girasol"></div></div>
         </div>
         
-        <!-- FLOR 7: Margarita (blanca) -->
+        <!-- FLOR 7: Margarita -->
         <div class="margarita" style="animation-delay: 1.4s;">
             <div class="tallo"><div class="hoja hoja-izq"></div><div class="hoja hoja-der"></div></div>
             <div class="flor-margarita"><div class="centro-margarita"></div></div>
         </div>
         
-        <!-- FLOR 8: Girasol (amarillo) -->
+        <!-- FLOR 8: Girasol -->
         <div class="sunflower" style="animation-delay: 1.6s;">
             <div class="tallo"><div class="hoja hoja-izq"></div><div class="hoja hoja-der"></div></div>
             <div class="flor-girasol"><div class="centro-girasol"></div></div>
         </div>
         
-        <!-- FLOR 9: Margarita (blanca) -->
+        <!-- FLOR 9: Margarita -->
         <div class="margarita" style="animation-delay: 1.8s;">
             <div class="tallo"><div class="hoja hoja-izq"></div><div class="hoja hoja-der"></div></div>
             <div class="flor-margarita"><div class="centro-margarita"></div></div>
         </div>
         
-        <!-- FLOR 10: Girasol (amarillo) -->
+        <!-- FLOR 10: Girasol -->
         <div class="sunflower" style="animation-delay: 2.0s;">
             <div class="tallo"><div class="hoja hoja-izq"></div><div class="hoja hoja-der"></div></div>
             <div class="flor-girasol"><div class="centro-girasol"></div></div>
@@ -532,53 +609,44 @@
     <div class="pasto"></div>
 
     <script>
-        // Función para iniciar la fiesta
         function iniciarFiesta() {
             const overlay = document.getElementById('startOverlay');
             overlay.style.opacity = '0';
             setTimeout(() => {
                 overlay.style.display = 'none';
-                // Iniciar lluvia de corazones al abrir (más frecuente)
-                setInterval(crearCorazon, 250);
-                // Crear estrellas iniciales
+                // Reducir frecuencia de corazones en móvil para mejor rendimiento
+                const esMovil = window.innerWidth <= 768;
+                setInterval(crearCorazon, esMovil ? 400 : 250);
                 crearEstrellas();
-                // Crear algunos corazones adicionales al inicio
-                for (let i = 0; i < 20; i++) {
+                for (let i = 0; i < (esMovil ? 10 : 20); i++) {
                     setTimeout(crearCorazon, i * 150);
                 }
             }, 1500);
         }
 
-        // Crear corazones flotantes
         function crearCorazon() {
             const corazon = document.createElement('div');
             corazon.className = 'corazon';
             corazon.innerHTML = '❤️';
             
-            // Posición aleatoria
             corazon.style.left = Math.random() * 100 + 'vw';
             
-            // Tamaño aleatorio (más variado)
-            const size = Math.random() * 25 + 15;
+            const size = Math.random() * (window.innerWidth <= 480 ? 20 : 25) + (window.innerWidth <= 480 ? 10 : 15);
             corazon.style.fontSize = size + 'px';
             
-            // Duración aleatoria
             corazon.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            
-            // Retraso aleatorio
             corazon.style.animationDelay = (Math.random() * 2) + 's';
             
             document.body.appendChild(corazon);
             
-            // Eliminar después de la animación
             setTimeout(() => {
                 corazon.remove();
             }, 6000);
         }
 
-        // Crear estrellas en el fondo
         function crearEstrellas() {
-            for (let i = 0; i < 60; i++) {
+            const cantidad = window.innerWidth <= 480 ? 30 : 60;
+            for (let i = 0; i < cantidad; i++) {
                 setTimeout(() => {
                     const estrella = document.createElement('div');
                     estrella.className = 'estrella';
@@ -586,15 +654,13 @@
                     estrella.style.top = Math.random() * 70 + '%';
                     estrella.style.left = Math.random() * 100 + '%';
                     estrella.style.animationDelay = Math.random() * 3 + 's';
-                    estrella.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                    estrella.style.fontSize = (Math.random() * (window.innerWidth <= 480 ? 12 : 15) + (window.innerWidth <= 480 ? 8 : 10)) + 'px';
                     document.body.appendChild(estrella);
                 }, i * 50);
             }
         }
 
-        // Precargar la imagen (opcional)
         window.addEventListener('load', function() {
-            // Verificar si la imagen existe
             const img = new Image();
             img.src = 'key.jpg';
             img.onload = function() {
@@ -606,6 +672,12 @@
                 document.querySelector('.marco-imagen img').style.display = 'none';
                 document.querySelector('.placeholder').style.display = 'flex';
             };
+        });
+
+        // Detectar cambios de orientación
+        window.addEventListener('resize', function() {
+            // Ajustar animaciones si es necesario
+            document.body.style.height = window.innerHeight + 'px';
         });
     </script>
 </body>
